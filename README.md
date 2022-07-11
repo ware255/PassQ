@@ -7,7 +7,7 @@ Fortranで書かれた自動パスワード生成器です。<br>
 32桁が強いですが、根性がある人は1024桁にしてみるのもありかもしれないです。<br>
 
 ## 動作確認済みOS
-* Debina WSL
+* Debina WSL<br>
 それくらい<br>
 
 ## インスール方法
@@ -17,3 +17,4 @@ git clone https://github.com/ware255/PassQ.git
 cd PassQ
 make
 ```
+実行は `./PassQ` です。
