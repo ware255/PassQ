@@ -3,7 +3,7 @@ CC     = gfortran
 SRCS   = src/main.cpp
 
 PassQ:
-  $(CC) $(SRCS) -o $(TARGET) -Wall
+	$(CC) $(SRCS) -o $(TARGET) -Wall
 
 clean:
-  rm -f $(TARGET)
+	rm -fr $(TARGET)
