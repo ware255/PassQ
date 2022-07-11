@@ -1,6 +1,6 @@
 TARGET = PassQ
 CC     = gfortran
-SRCS   = src/main.cpp
+SRCS   = src/main.f90
 
 PassQ:
 	$(CC) $(SRCS) -o $(TARGET) -Wall
