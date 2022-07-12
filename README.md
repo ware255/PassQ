@@ -8,6 +8,7 @@ Fortranで書かれた自動パスワード生成器です。<br>
 
 ## 動作確認済みOS
 * Debina WSL<br>
+
 それくらい<br>
 
 ## インスール方法
@@ -17,4 +18,4 @@ git clone https://github.com/ware255/PassQ.git
 cd PassQ
 make
 ```
-実行は `./PassQ` です。
+実行はするには `./PassQ` をターミナルに打ち込んでEnterを押すと起動できます。引数は入りません。
