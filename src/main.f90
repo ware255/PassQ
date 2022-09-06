@@ -1,6 +1,6 @@
 module key
     use, intrinsic :: iso_fortran_env, only: int64
-    character(len=1) :: str(94) = ['A', 'B', 'C', 'D', 'E', 'F',&
+    character(len=1) :: str(90) = ['A', 'B', 'C', 'D', 'E', 'F',&
                                 &'G', 'H', 'I', 'J', 'K', 'L',&
                                 &'N', 'M', 'O', 'P', 'Q', 'R',&
                                 &'S', 'T', 'U', 'V', 'W', 'X',&
@@ -14,8 +14,7 @@ module key
                                 &'%', '&', '''', '(', ')', '=',&
                                 &'-', '~', '^', '|', '@', '`',&
                                 &'[', '{', ']', '}', '*', ':',&
-                                &'+', ';', '_', '?', '/', '.',&
-                                &',', '<', '>', '\']
+                                &'+', ';', '_', '?', '/', '.']
     integer(int64) seed, max, err, i, re, level, t
 contains
     integer(int64) function xor128(w)
@@ -36,7 +35,7 @@ subroutine level_1()
     t = seed + 1
     i = 0
     do
-        re = mod(xor(xor128(seed), xor128(t)), 94) + 1
+        re = mod(xor(xor128(seed), xor128(t)), 90)
         if (re > 62 .or. re < 53) then
             cycle
         else if (i .eq. max) then
@@ -53,7 +52,7 @@ subroutine level_2()
     t = seed + 1
     i = 0
     do
-        re = mod(xor(xor128(seed), xor128(t)), 94) + 1
+        re = mod(xor(xor128(seed), xor128(t)), 90)
         if (re > 52 .or. re < 23) then
             cycle
         else if (i .eq. max) then
@@ -70,7 +69,7 @@ subroutine level_3()
     t = seed + 1
     i = 0
     do
-        re = mod(xor(xor128(seed), xor128(t)), 94) + 1
+        re = mod(xor(xor128(seed), xor128(t)), 90)
         if (re > 62 .or. re < 23) then
             cycle
         else if (i .eq. max) then
@@ -87,8 +86,8 @@ subroutine level_4()
     t = seed + 1
     i = 0
     do
-        re = mod(xor(xor128(seed), xor128(t)), 94) + 1
-        if (re > 62) then
+        re = mod(xor(xor128(seed), xor128(t)), 90)
+        if (re > 62 .or. re < 1) then
             cycle
         else if (i .eq. max) then
             exit
@@ -102,8 +101,9 @@ subroutine level_no()
     use key
     implicit none
     t = seed + 1
-    do i = 1, max
-        re = mod(xor(xor128(seed), xor128(t)), 94) + 1
+    re = mod(xor(xor128(seed), xor128(t)), 89) + 1
+    do i = 0, max
+        re = mod(xor(xor128(seed), xor128(t)), 89) + 1
         write (*, '(A)', advance='no') str(re:re)
     end do
 end subroutine level_no
