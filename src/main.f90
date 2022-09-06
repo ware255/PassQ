@@ -16,7 +16,7 @@ module key
                                 &'[', '{', ']', '}', '*', ':',&
                                 &'+', ';', '_', '?', '/', '.',&
                                 &',', '<', '>', '\']
-    integer(int64) seed, max, err, i, re, level
+    integer(int64) seed, max, err, i, re, level, t
 contains
     integer(int64) function xor128(w)
         implicit none
@@ -33,9 +33,10 @@ end module key
 subroutine level_1()
     use key
     implicit none
+    t = seed + 1
     i = 0
     do
-        re = mod(xor128(seed), 94) + 1
+        re = mod(xor(xor128(seed), xor128(t)), 94) + 1
         if (re > 62 .or. re < 53) then
             cycle
         else if (i .eq. max) then
@@ -49,9 +50,10 @@ end subroutine level_1
 subroutine level_2()
     use key
     implicit none
+    t = seed + 1
     i = 0
     do
-        re = mod(xor128(seed), 94) + 1
+        re = mod(xor(xor128(seed), xor128(t)), 94) + 1
         if (re > 52 .or. re < 23) then
             cycle
         else if (i .eq. max) then
@@ -65,9 +67,10 @@ end subroutine level_2
 subroutine level_3()
     use key
     implicit none
+    t = seed + 1
     i = 0
     do
-        re = mod(xor128(seed), 94) + 1
+        re = mod(xor(xor128(seed), xor128(t)), 94) + 1
         if (re > 62 .or. re < 23) then
             cycle
         else if (i .eq. max) then
@@ -81,9 +84,10 @@ end subroutine level_3
 subroutine level_4()
     use key
     implicit none
+    t = seed + 1
     i = 0
     do
-        re = mod(xor128(seed), 94) + 1
+        re = mod(xor(xor128(seed), xor128(t)), 94) + 1
         if (re > 62) then
             cycle
         else if (i .eq. max) then
@@ -97,8 +101,9 @@ end subroutine level_4
 subroutine level_no()
     use key
     implicit none
+    t = seed + 1
     do i = 1, max
-        re = mod(xor128(seed), 94) + 1
+        re = mod(xor(xor128(seed), xor128(t)), 94) + 1
         write (*, '(A)', advance='no') str(re:re)
     end do
 end subroutine level_no
